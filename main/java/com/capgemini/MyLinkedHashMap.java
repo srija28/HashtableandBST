@@ -20,6 +20,7 @@ public class MyLinkedHashMap<K,V> {
 		System.out.println("Key: "+key+" hashCode: "+hashCode+" index : "+index);
 		return index;
 	}
+	
 	public V getKey(K key) {
 		int index = this.getBucketIndex(key);
 		MyLinkedList <K> myLinkedList = this.myBucketArray.get(index);
@@ -44,6 +45,14 @@ public class MyLinkedHashMap<K,V> {
 			myMapNode.setValue(value);
 		}
 	}
+	
+	public MyMapNode<K, V> removeElement(K key) {
+		int index = this.getBucketIndex(key);
+		MyLinkedList<K> myList = this.myBucketArray.get(index);
+		MyMapNode<K, V> myMapNode = (MyMapNode<K, V>) myList.searchAndRemove(key);
+		return (myMapNode == null) ? null : myMapNode;
+	}
+	
 	@Override
 	public String toString() {
 		return "MyLinkedHashMap List: {  " + myBucketArray + " }";
