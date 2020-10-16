@@ -3,6 +3,8 @@ package com.capgemini;
 public class MyBinaryTree<K extends Comparable<K>> {
 	
 	private MyBinaryNode<K> root;
+	private MyBinaryNode<K> searchedNode;
+	private MyBinaryNode<K> tempNode;
 
 	public void add(K key) {
 		this.root = this.addRecursively(root, key);
@@ -22,6 +24,23 @@ public class MyBinaryTree<K extends Comparable<K>> {
 		}
 		return current;
 	}
+	
+	public boolean searchRecursively(K key) {
+
+		if (tempNode == null)
+			return false;
+		int result = tempNode.key.compareTo(key);
+		if (result == 0) {
+			return true;
+		} else if (result < 0) {
+			tempNode = root.right;
+			return searchRecursively(key);
+		} else {
+			tempNode = tempNode.left;
+			return searchRecursively(key);
+		}
+	}
+	
 	public int getSize() {
 		return this.getSizeRecursive(root);
 	}
